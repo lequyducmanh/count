@@ -2,23 +2,52 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// const initialCount = {count : 0};
+// var count  = 0;
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count : 0
+    }
+  }
+
+  resetState () {
+    this.setState ({
+      count : 0
+    })
+  }
+
+  nextCount(){
+    this.setState((state) => {
+      console.log(state);
+      return {count: state.count + 1};
+    });
+  }
+  prevCount(){
+    this.setState((state) => {
+      if(state.count === 0){
+        return state.count = 0;
+      }
+      else{
+        return {count: state.count - 1};
+      }
+    });
+  }
+
+ 
+
+
+  
   render() {
+    const {count} = this.state
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          Count: {count}
+          <button onClick={() => this.resetState()}>Reset</button>
+          <button onClick={() => this.nextCount()}>+</button>
+          <button onClick={() => this.prevCount()}>-</button>
         </header>
       </div>
     );
